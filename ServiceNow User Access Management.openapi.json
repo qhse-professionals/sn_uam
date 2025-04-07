@@ -5,24 +5,26 @@
   },
   "info": {
     "title": "ServiceNow User Access Management",
-    "description": "",
-    "version": "1.0.0"
+    "description": "Suite of APIs for managing the user lifecycle.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "ServiceNow",
+      "email": "support@servicenow.com"
+    },
+    "summary": "External APIs for User Management "
   },
   "tags": [
-    {
-      "name": "pet"
-    },
     {
       "name": "User Management"
     }
   ],
   "paths": {
-    "/v1/usermanagement/users/": {
+    "/v1/usermanagement/users": {
       "post": {
         "summary": "Create a new user",
         "deprecated": false,
         "description": "A new user is created and associated to the account of the customer. If there is already an existing user with same email id then user will not be created.",
-        "operationId": "createUser\"",
+        "operationId": "createUser",
         "tags": [
           "User Management"
         ],
@@ -614,42 +616,6 @@
   },
   "components": {
     "schemas": {
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "Category ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category Name"
-          }
-        },
-        "x-stoplight": {
-          "id": "e8qxwfwt6gm0y"
-        }
-      },
-      "Tag": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "Tag ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "Tag Name"
-          }
-        },
-        "x-stoplight": {
-          "id": "la5o28io1bdrf"
-        }
-      },
       "AccessRole": {
         "type": "object",
         "properties": {
@@ -771,6 +737,11 @@
       }
     }
   },
-  "servers": [],
+  "servers": [
+    {
+      "url": "https://api.servicenow.com",
+      "description": "Production"
+    }
+  ],
   "security": []
 }
