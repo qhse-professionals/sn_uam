@@ -1,0 +1,776 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "w6gwx1447e5bc"
+  },
+  "info": {
+    "title": "ServiceNow User Access Management",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "pet"
+    },
+    {
+      "name": "User Management"
+    }
+  ],
+  "paths": {
+    "/v1/usermanagement/users/": {
+      "post": {
+        "summary": "Create a new user",
+        "deprecated": false,
+        "description": "A new user is created and associated to the account of the customer. If there is already an existing user with same email id then user will not be created.",
+        "operationId": "createUser\"",
+        "tags": [
+          "User Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User has been created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity (User Already Exists)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "List users",
+        "deprecated": false,
+        "description": "This request will return the core profile attributes of the user such as firstName, lastName, emailId and access roles.",
+        "operationId": "listUser",
+        "tags": [
+          "User Management"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  },
+                  "required": [
+                    "users"
+                  ]
+                },
+                "example": {
+                  "users": [
+                    {
+                      "email": "john@email.com",
+                      "mobilePhone": "(378) 357-6762",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "businessPhone": "(325) 974-2273",
+                      "accessRoles": [
+                        {
+                          "name": "Customer Admin"
+                        },
+                        {
+                          "name": "Customer Admin"
+                        },
+                        {
+                          "name": "Customer Admin"
+                        }
+                      ]
+                    },
+                    {
+                      "email": "mike@email.com",
+                      "mobilePhone": "(200) 299-6281",
+                      "firstName": "Mike",
+                      "lastName": "Doe",
+                      "businessPhone": "(223) 581-0313",
+                      "accessRoles": [
+                        {
+                          "name": "Customer Admin"
+                        }
+                      ]
+                    },
+                    {
+                      "email": "richard@email.com",
+                      "mobilePhone": "(843) 329-7853",
+                      "firstName": "Richard",
+                      "lastName": "Doe",
+                      "businessPhone": "(501) 903-2061",
+                      "accessRoles": [
+                        {
+                          "name": "Customer Admin"
+                        },
+                        {
+                          "name": "Customer Admin"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      }
+    },
+    "/v1/usermanagement/users/{emailID}": {
+      "get": {
+        "summary": "Get the details of user",
+        "deprecated": false,
+        "description": "This request will return the core profile attributes of the user such as firstName, lastName, emailId and access roles.",
+        "operationId": "getUser",
+        "tags": [
+          "User Management"
+        ],
+        "parameters": [
+          {
+            "name": "emailID",
+            "in": "path",
+            "description": "The email id of the user",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update the attributes of user",
+        "deprecated": false,
+        "description": "Update the core profile attributes of the user such as firstName, lastName, emailId and access roles.",
+        "operationId": "updateUserProfile",
+        "tags": [
+          "User Management"
+        ],
+        "parameters": [
+          {
+            "name": "emailID",
+            "in": "path",
+            "description": "The email id of the user",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User details updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Update user's first name",
+                    "value": {
+                      "firstName": "John"
+                    }
+                  },
+                  "2": {
+                    "summary": "Update user's last name",
+                    "value": {
+                      "lastName": "Doe"
+                    }
+                  },
+                  "3": {
+                    "summary": "Add a new access role",
+                    "value": {
+                      "accessRoles": [
+                        {
+                          "name": "Customer Admin"
+                        },
+                        {
+                          "name": "Now Support Admin"
+                        }
+                      ]
+                    }
+                  },
+                  "4": {
+                    "summary": "update the access role",
+                    "value": {
+                      "accessRoles": [
+                        {
+                          "name": "Customer Admin"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      }
+    },
+    "/v1/usermanagement/users/{emailID}/disassociate": {
+      "post": {
+        "summary": "Disassociate the user from account",
+        "deprecated": false,
+        "description": "User will be dissoaciated from the account and all the access roles will be removed. A user will not be able to access any of the account data but will be able to access its own profile.",
+        "operationId": "disassociateUser",
+        "tags": [
+          "User Management"
+        ],
+        "parameters": [
+          {
+            "name": "emailID",
+            "in": "path",
+            "description": "The email id of the user",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User has been dissoaciated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity (Business Validation Error)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Category ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Category Name"
+          }
+        },
+        "x-stoplight": {
+          "id": "e8qxwfwt6gm0y"
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Tag ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag Name"
+          }
+        },
+        "x-stoplight": {
+          "id": "la5o28io1bdrf"
+        }
+      },
+      "AccessRole": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "Customer Admin",
+              "Now Support Admin",
+              "Partner Admin"
+            ],
+            "examples": [
+              "Customer Admin"
+            ]
+          }
+        },
+        "x-stoplight": {
+          "id": "g4gqtd7hwlx4w"
+        }
+      },
+      "User": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "agcu520bqzebr"
+        },
+        "properties": {
+          "email": {
+            "type": "string",
+            "examples": [
+              "john@email.com"
+            ]
+          },
+          "mobilePhone": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string",
+            "examples": [
+              "John"
+            ]
+          },
+          "lastName": {
+            "type": "string",
+            "examples": [
+              "Doe"
+            ]
+          },
+          "businessPhone": {
+            "type": "string"
+          },
+          "accessRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessRole"
+            }
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "format": "uri",
+            "description": "A URI reference [RFC3986] that identifies the problem type. When dereferenced, it SHOULD provide human-readable documentation for the problem type (e.g., using HTML [W3C.REC-html5-20141028]). When this member is not present, its value is assumed to be \"about:blank\"."
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4)."
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem."
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem."
+          },
+          "instance": {
+            "type": "string",
+            "format": "uri",
+            "description": "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "klig7y39h72tn"
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "tokenUrl": "https://servicenow.okta.com//oauth2/v1/token",
+            "scopes": {
+              "read_users": "Read the details of the users",
+              "write_users": "Create the user",
+              "update_users": "update the user information",
+              "disassociate_users": "Dissaociate the users from the account without deleting them"
+            },
+            "authorizationUrl": "https://servicenow.okta.com//oauth2/v1/token"
+          }
+        }
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}
